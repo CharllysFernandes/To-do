@@ -1,21 +1,42 @@
-let inputToDo = document.getElementById("inputTask");
+let inputToDo = document.getElementById("addTask");
 
 // console.log(inputToDo);
 
 inputToDo.addEventListener('change', function () {
-    console.log(getTaskInput())
+    let inputToDo = document.getElementById("addTask").value;
+    let containerTask = document.getElementById('containerTask');
+    
+    containerTask.innerHTML +=
+    `
+    <div class="card-style-input">
+    <button>
+        <i class="bi bi-square"></i>
+    </button>
+    <h1>${inputToDo}</h1>
+    <button>
+        <i class="bi bi-x-lg"></i>
+    </button>
+    </div>
+    `
+    // console.log(getTaskInput())
 })
 
 // function get innerHtml for inputTask
 
 function getTaskInput() {
-let inputToDo = document.getElementById("inputTask").value;
+    let input = document.getElementById("addTask");
 
-    return inputToDo;
+
 }
 
 // function load index and save in Storage.
 
 function loadTask() {
     
+}
+
+// Save
+
+function save(obj) {
+    localStorage('')
 }
