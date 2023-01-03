@@ -1,53 +1,44 @@
 let inputToDo = document.getElementById("addTask");
 let containerTask = document.getElementById('containerTask');
-let databaseStorage = JSON.parse(localStorage.getItem('database'))
+let databaseStorage = JSON.parse(localStorage.getItem('database'));
 
-if (databaseStorage !== null) {
-    for (let i = 0; i < databaseStorage.length; i++) {
-        containerTask.innerHTML +=
-            `
-        <div class="card-style-input">
-        <button onclick=completed(${databaseStorage[i].id})>
-        <i class="bi bi-square"></i>
-        </button>
-        <h1 id=label_${databaseStorage[i].id}>${databaseStorage[i].task}</h1>
-        <button>
-        <i class="bi bi-x-lg"></i>
-        </button>
-        </div>
-        `
-    }
+// Initial Array
 
-} else {
+if (databaseStorage === null) {
+    console.log("Array vazia")
     databaseStorage = [];
+} else {
+    renderTask(databaseStorage)
 }
 
 inputToDo.addEventListener('change', function () {
     let addTask = document.getElementById("addTask").value;
-    containerTask.innerHTML +=
-        `
-    <div class="card-style-input">
-    <button>
-        <i class="bi bi-square"></i>
-    </button>
-    <h1>${addTask}</h1>
-    <button>
-        <i class="bi bi-x-lg"></i>
-    </button>
-    </div>
-    `
-    // console.log(getTaskInput())
-
-    databaseStorage.push({ id: `${databaseStorage.length + 1}`, task: `${addTask}` })
+    
+    databaseStorage.push({ id: `${databaseStorage.length}`, task: `${addTask}`, completed: `${false}` })
     let storage = JSON.stringify(databaseStorage)
     localStorage.setItem('database', storage)
-
+    window.location.reload();
 })
 
-function completed(id) {
-    console.log( id)
-    let label = document.getElementById(`label_${id}`)
+function renderTask(databaseArray) {
+    if (databaseArray !== null) {
+        for (let i = 0; i < databaseArray.length; i++) {
+            containerTask.innerHTML +=
+                `
+            <div class="card-style-input">
+            <button onclick=completed(${databaseStorage[i].id})>
+            <i class="bi bi-square"></i>
+            </button>
+            <h1 id=label_${databaseStorage[i].id}>${databaseStorage[i].task}</h1>
+            <button>
+            <i class="bi bi-x-lg"></i>
+            </button>
+            </div>
+            `
+        }
+    }  
+}
 
-    label.classList.add("text-decoration-line-through");
-
+function completed(index) {
+   console.log(index)
 }
