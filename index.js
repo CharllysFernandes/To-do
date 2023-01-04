@@ -26,11 +26,11 @@ function renderTask(databaseArray) {
             containerTask.innerHTML +=
                 `
             <div class="card-style-input">
-            <button onclick=completed(${databaseStorage[i].id})>
-            <i class="bi bi-square"></i>
+            <button>
+            <i id="check_${databaseStorage[i].id}" class="bi bi-square"></i>
             </button>
             <h1 id=label_${databaseStorage[i].id}>${databaseStorage[i].task}</h1>
-            <button>
+            <button onclick=remove(${databaseStorage[i].id})>
             <i class="bi bi-x-lg"></i>
             </button>
             </div>
@@ -39,6 +39,29 @@ function renderTask(databaseArray) {
     }  
 }
 
-function completed(index) {
-   console.log(index)
+function save(databaseStorage) {
+    let storage = JSON.stringify(databaseStorage)
+    localStorage.setItem('database', storage)
+    window.location.reload();
+}
+
+function remove(index) {
+    console.log(index)
+
+    console.log(databaseStorage);
+    let newArray = databaseStorage.splice(index, 1);
+   
+    save(databaseStorage)
+
+
+
+
+    console.log(newArray)
+
+
+    // document.getElementById(`label_${index}`).classList.add("text-decoration-line-through");
+    // document.getElementById(`check_${index}`).classList.remove('bi-square');
+    // document.getElementById(`check_${index}`).classList.add('bi-check-square');
+
+
 }
