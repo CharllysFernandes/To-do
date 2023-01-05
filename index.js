@@ -3,13 +3,10 @@ let containerTask = document.getElementById('containerTask');
 let databaseStorage = JSON.parse(localStorage.getItem('database'));
 let arrowButton = document.getElementById("addTaskBtn");
 
-// Initial Array
-
 if (databaseStorage === null) {
-    console.log("Array vazia")
-    databaseStorage = [];
+    databaseStorage = []; // Initial one array
 } else {
-    renderTask(databaseStorage)
+    renderTask(databaseStorage); // render databaseStorage
 }
 arrowButton.addEventListener('click', function () {
     window.location.reload()
@@ -29,8 +26,7 @@ function addTask() {
 function renderTask(databaseArray) {
     if (databaseArray !== null) {
         for (let i = 0; i < databaseArray.length; i++) {
-            containerTask.innerHTML +=
-                `
+            containerTask.innerHTML += `
             <div class="card-style-input animate__bounceIn animate__animated">
             <button onclick=check(${databaseStorage[i].id})>
             <i id="check_${databaseStorage[i].id}" class="bi ${databaseStorage[i].completed === 'true' ? "bi-check-square" : "bi-square"}"></i>
@@ -39,8 +35,7 @@ function renderTask(databaseArray) {
             <button onclick=remove(${databaseStorage[i].id})>
             <i class="bi bi-x-lg"></i>
             </button>
-            </div>
-            `
+            </div> `
         }
     }
 }
