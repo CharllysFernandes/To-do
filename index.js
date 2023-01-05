@@ -51,7 +51,15 @@ function remove(param) {
     save(databaseStorage)
 }
 
-function check(id) {
-    databaseStorage[id].completed === "false" ? databaseStorage[id].completed = "true" : databaseStorage[id].completed = "false";
-    save(databaseStorage)
+function check(i) {
+
+    pos = databaseStorage.map(function (e) {
+        return e.id
+    })
+
+
+//     // alterar o index.completed
+
+//     databaseStorage[id].completed === "false" ? databaseStorage[id].completed = "true" : databaseStorage[id].completed = "false";
+//     save(databaseStorage)
 }
