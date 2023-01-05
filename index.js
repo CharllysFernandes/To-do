@@ -13,7 +13,6 @@ if (databaseStorage === null) {
 
 inputToDo.addEventListener('change', function () {
     let addTask = document.getElementById("addTask").value;
-    
     databaseStorage.push({ id: `${databaseStorage.length}`, task: `${addTask}`, completed: `${false}` })
     let storage = JSON.stringify(databaseStorage)
     localStorage.setItem('database', storage)
@@ -25,18 +24,18 @@ function renderTask(databaseArray) {
         for (let i = 0; i < databaseArray.length; i++) {
             containerTask.innerHTML +=
                 `
-            <div class="card-style-input">
-            <button>
-            <i id="check_${databaseStorage[i].id}" class="bi bi-square"></i>
+            <div class="card-style-input animate__bounceIn animate__animated">
+            <button onclick=check(${databaseStorage[i].id})>
+            <i id="check_${databaseStorage[i].id}" class="bi ${databaseStorage[i].completed === 'true' ? "bi-check-square" : "bi-square"}"></i>
             </button>
-            <h1 id=label_${databaseStorage[i].id}>${databaseStorage[i].task}</h1>
+            <h1 id=label_${databaseStorage[i].id} class="${databaseStorage[i].completed === "false" ? "text-light" : "text-decoration-line-through text-muted"}">${databaseStorage[i].task}</h1>
             <button onclick=remove(${databaseStorage[i].id})>
             <i class="bi bi-x-lg"></i>
             </button>
             </div>
             `
         }
-    }  
+    }
 }
 
 function save(databaseStorage) {
@@ -45,23 +44,16 @@ function save(databaseStorage) {
     window.location.reload();
 }
 
-function remove(index) {
-    console.log(index)
-
-    console.log(databaseStorage);
-    let newArray = databaseStorage.splice(index, 1);
-   
+function remove(param) {
+    databaseStorage.splice([param].id, 1);
     save(databaseStorage)
+}
 
-
-
-
-    console.log(newArray)
-
-
-    // document.getElementById(`label_${index}`).classList.add("text-decoration-line-through");
-    // document.getElementById(`check_${index}`).classList.remove('bi-square');
-    // document.getElementById(`check_${index}`).classList.add('bi-check-square');
-
-
+function check(id) {
+    if (databaseStorage[id].completed === "false") {
+        databaseStorage[id].completed = "true";
+    } else {
+        databaseStorage[id].completed = "false";
+    }
+    save(databaseStorage)
 }
