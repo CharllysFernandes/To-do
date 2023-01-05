@@ -1,6 +1,7 @@
 let inputToDo = document.getElementById("addTask");
 let containerTask = document.getElementById('containerTask');
 let databaseStorage = JSON.parse(localStorage.getItem('database'));
+let arrowButton = document.getElementById("addTaskBtn");
 
 // Initial Array
 
@@ -10,14 +11,20 @@ if (databaseStorage === null) {
 } else {
     renderTask(databaseStorage)
 }
-
+arrowButton.addEventListener('click', function () {
+    window.location.reload()
+})
 inputToDo.addEventListener('change', function () {
+    addTask();
+})
+
+function addTask() {
     let addTask = document.getElementById("addTask").value;
     databaseStorage.push({ id: `${databaseStorage.length}`, task: `${addTask}`, completed: `${false}` })
     let storage = JSON.stringify(databaseStorage)
     localStorage.setItem('database', storage)
     window.location.reload();
-})
+}
 
 function renderTask(databaseArray) {
     if (databaseArray !== null) {
@@ -50,10 +57,6 @@ function remove(param) {
 }
 
 function check(id) {
-    if (databaseStorage[id].completed === "false") {
-        databaseStorage[id].completed = "true";
-    } else {
-        databaseStorage[id].completed = "false";
-    }
+    databaseStorage[id].completed === "false" ? databaseStorage[id].completed = "true" : databaseStorage[id].completed = "false";
     save(databaseStorage)
 }
