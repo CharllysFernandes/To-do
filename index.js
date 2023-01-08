@@ -16,8 +16,9 @@ inputToDo.addEventListener('change', function () {
 })
 
 function addTask() {
+    let id = Math.floor(Math.random()*100) // create random number 0 to 100
     let addTask = document.getElementById("addTask").value;
-    databaseStorage.push({ id: `${databaseStorage.length}`, task: `${addTask}`, completed: `${false}` })
+    databaseStorage.push({ "id":`${id*1}`, task: `${addTask}`, completed: `${false}` })
     let storage = JSON.stringify(databaseStorage)
     localStorage.setItem('database', storage)
     window.location.reload();
@@ -29,7 +30,7 @@ function renderTask(databaseArray) {
             containerTask.innerHTML += `
             <div class="card-style-input animate__bounceIn animate__animated">
             <button onclick=check(${databaseStorage[i].id})>
-            <i id="check_${databaseStorage[i].id}" class="bi ${databaseStorage[i].completed === 'true' ? "bi-check-square" : "bi-square"}"></i>
+            <i class="bi ${databaseStorage[i].completed === 'true' ? "bi-check-square" : "bi-square"}"></i>
             </button>
             <h1 id=label_${databaseStorage[i].id} class="${databaseStorage[i].completed === "false" ? "text-light" : "text-decoration-line-through text-muted"}">${databaseStorage[i].task}</h1>
             <button onclick=remove(${databaseStorage[i].id})>
@@ -51,12 +52,16 @@ function remove(param) {
     save(databaseStorage)
 }
 
-function check(i) {
+function check(param) {
 
-    pos = databaseStorage.map(function (e) {
-        return e.id
-    })
+    let convert = JSON.parse(param)
+    
+    console.log(param);
+    console.log(convert);
 
+
+   
+    
 
 //     // alterar o index.completed
 
