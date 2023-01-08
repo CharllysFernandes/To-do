@@ -48,7 +48,8 @@ function save(databaseStorage) {
 }
 
 function remove(param) {
-    databaseStorage.splice([param].id, 1);
+    let index = searchIndex(param)
+    databaseStorage.splice(index, 1);
     save(databaseStorage)
 }
 
