@@ -1,28 +1,21 @@
 let inputToDo = document.getElementById("addTask");
 let containerTask = document.getElementById('containerTask');
-let databaseStorage = JSON.parse(localStorage.getItem('database'));
 let arrowButton = document.getElementById("addTaskBtn");
+let databaseStorage = JSON.parse(localStorage.getItem('database'));
 
 if (databaseStorage === null) {
     databaseStorage = []; // Initial one array
 } else {
     renderTask(databaseStorage); // render databaseStorage
 }
+
 arrowButton.addEventListener('click', function () {
     window.location.reload()
 })
+
 inputToDo.addEventListener('change', function () {
     addTask();
 })
-
-function addTask() {
-    let id = Math.floor(Math.random() * 100) // create random number 0 to 100
-    let addTask = document.getElementById("addTask").value;
-    databaseStorage.push({ "id": `${id * 1}`, task: `${addTask}`, completed: `${false}` })
-    let storage = JSON.stringify(databaseStorage)
-    localStorage.setItem('database', storage)
-    window.location.reload();
-}
 
 function renderTask(databaseArray) {
     if (databaseArray !== null) {
@@ -41,16 +34,11 @@ function renderTask(databaseArray) {
     }
 }
 
-function save(databaseStorage) {
-    let storage = JSON.stringify(databaseStorage)
-    localStorage.setItem('database', storage)
-    window.location.reload();
-}
-
-function remove(param) {
-    let index = searchIndex(param)
-    databaseStorage.splice(index, 1);
-    save(databaseStorage)
+function addTask() {
+    let addTask = document.getElementById("addTask").value;
+    let id = Math.floor(Math.random() * 100) // create random number 0 to 100
+    databaseStorage.push({ "id": `${id * 1}`, task: `${addTask}`, completed: `${false}` })
+    save(databaseStorage);
 }
 
 function searchIndex(value) {
@@ -59,11 +47,19 @@ function searchIndex(value) {
     })
 }
 
-
-function check(param) {
-    // search index
-    let index = searchIndex(param);
-
+function check(id) {
+    let index = searchIndex(id);
     databaseStorage[index].completed === "false" ? databaseStorage[index].completed = "true" : databaseStorage[index].completed = "false";
     save(databaseStorage)
 }
+
+function save(databaseStorage) {
+    localStorage.setItem('database', JSON.stringify(databaseStorage))
+    window.location.reload();
+}
+
+function remove(id) {
+    databaseStorage.splice(searchIndex(id), 1);
+    save(databaseStorage)
+}
+

@@ -7,13 +7,19 @@ Changed:
 html {
   box-sizing: border-box;
   font-size: 10px;
+  background-color: #252736;
+  background-attachment: fixed;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
-body, ul, li {
+body,
+ul,
+li {
   margin: 0;
   padding: 0;
 }
@@ -22,7 +28,13 @@ li {
   list-style: none;
 }
 
-p, h1, h2, h3, h4, h5, h6 {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin-top: 0;
 }
 
@@ -48,6 +60,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-image: radial-gradient(circle at 0% 0%, #373b52, #252736 51%, #1d1e26);
+
 }
 
 h1.demo {
@@ -83,6 +96,7 @@ a.demo {
   0% {
     background-position: 0 0;
   }
+
   100% {
     background-position: 100% 0;
   }
@@ -92,10 +106,12 @@ a.demo {
   0% {
     background-position: 0 0;
   }
+
   100% {
     background-position: 100% 0;
   }
 }
+
 .webflow-style-input {
   position: relative;
   display: flex;
@@ -122,7 +138,7 @@ a.demo {
   background: linear-gradient(to right, #B294FF, #57E6E6, #FEFFB8, #57E6E6, #B294FF, #57E6E6);
   background-size: 500% auto;
   -webkit-animation: gradient 3s linear infinite;
-          animation: gradient 3s linear infinite;
+  animation: gradient 3s linear infinite;
 }
 
 .webflow-style-input input {
@@ -132,6 +148,7 @@ a.demo {
   line-height: 2.4rem;
   vertical-align: middle;
 }
+
 .webflow-style-input input::-webkit-input-placeholder {
   color: #7881A1;
 }
@@ -143,6 +160,7 @@ a.demo {
   vertical-align: middle;
   transition: color 0.25s;
 }
+
 .webflow-style-input button:hover {
   color: #BFD2FF;
 }
@@ -175,7 +193,7 @@ a.demo {
   background: linear-gradient(to right, #B294FF, #57E6E6, #FEFFB8, #57E6E6, #B294FF, #57E6E6);
   background-size: 500% auto;
   -webkit-animation: gradient 3s linear infinite;
-          animation: gradient 3s linear infinite;
+  animation: gradient 3s linear infinite;
 }
 
 .card-style-input h1 {
@@ -185,7 +203,8 @@ a.demo {
   line-height: 2.4rem;
   vertical-align: middle;
 }
-.card-style-input h1{
+
+.card-style-input h1 {
   color: #7881A1;
 }
 
@@ -196,7 +215,7 @@ a.demo {
   vertical-align: middle;
   transition: color 0.25s;
 }
+
 .card-style-input button:hover {
   color: #BFD2FF;
 }
-
