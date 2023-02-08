@@ -1,12 +1,24 @@
+const card = (id, completed, task) =>
+    `
+    <div class="card-style-input animate__animated animate__fadeIn">
+        <button onclick=check(${id})>
+            <i class="bi ${completed === 'true' ? "bi-check-square" : "bi-square"}"></i>
+        </button>
+        <h1 id=label_${id} class="${completed === "false" ? '' : "text-decoration-line-through text-muted"}">${task}</h1>
+        <button onclick=remove(${id})>
+            <i class="bi bi-x-lg"></i>
+        </button>
+    </div> 
+    `
 const inputToDo = document.getElementById("addTask");
 const containerTask = document.getElementById('containerTask');
 const arrowButton = document.getElementById("addTaskBtn");
 let databaseStorage = JSON.parse(localStorage.getItem('todoDB'));
 
 if (databaseStorage === null) {
-    databaseStorage = []; // Initial one array
+    databaseStorage = []; 
 } else {
-    renderTask(databaseStorage); // render databaseStorage
+    renderTask(databaseStorage); 
 }
 
 arrowButton.addEventListener('click', () => {
@@ -20,16 +32,11 @@ inputToDo.addEventListener('change', () => {
 function renderTask(databaseArray) {
     if (databaseArray !== null) {
         for (let i = 0; i < databaseArray.length; i++) {
-            containerTask.innerHTML += `
-            <div class="card-style-input animate__animated animate__fadeIn">
-            <button onclick=check(${databaseStorage[i].id})>
-            <i class="bi ${databaseStorage[i].completed === 'true' ? "bi-check-square" : "bi-square"}"></i>
-            </button>
-            <h1 id=label_${databaseStorage[i].id} class="${databaseStorage[i].completed === "false" ? "text-light" : "text-decoration-line-through text-muted"}">${databaseStorage[i].task}</h1>
-            <button onclick=remove(${databaseStorage[i].id})>
-            <i class="bi bi-x-lg"></i>
-            </button>
-            </div> `
+            let id = databaseStorage[i].id;
+            let completed = databaseStorage[i].completed;
+            let task = databaseStorage[i].task;
+
+            containerTask.innerHTML += card(id, completed, task)
         }
     }
 }
@@ -62,4 +69,3 @@ function remove(id) {
     databaseStorage.splice(searchIndex(id), 1);
     save(databaseStorage)
 }
-
