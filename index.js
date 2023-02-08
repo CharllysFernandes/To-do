@@ -1,7 +1,7 @@
-let inputToDo = document.getElementById("addTask");
-let containerTask = document.getElementById('containerTask');
-let arrowButton = document.getElementById("addTaskBtn");
-let databaseStorage = JSON.parse(localStorage.getItem('database'));
+const inputToDo = document.getElementById("addTask");
+const containerTask = document.getElementById('containerTask');
+const arrowButton = document.getElementById("addTaskBtn");
+let databaseStorage = JSON.parse(localStorage.getItem('todoDB'));
 
 if (databaseStorage === null) {
     databaseStorage = []; // Initial one array
@@ -9,11 +9,11 @@ if (databaseStorage === null) {
     renderTask(databaseStorage); // render databaseStorage
 }
 
-arrowButton.addEventListener('click', function () {
+arrowButton.addEventListener('click', () => {
     window.location.reload()
 })
 
-inputToDo.addEventListener('change', function () {
+inputToDo.addEventListener('change', () => {
     addTask();
 })
 
@@ -54,7 +54,7 @@ function check(id) {
 }
 
 function save(databaseStorage) {
-    localStorage.setItem('database', JSON.stringify(databaseStorage))
+    localStorage.setItem('todoDB', JSON.stringify(databaseStorage))
     window.location.reload();
 }
 
