@@ -1,4 +1,4 @@
-const inputToDo = document.getElementById('addTask');
+const addTaskInput = document.getElementById('addTask');
 const addTaskBtn = document.getElementById('addTaskBtn');
 const containerTask = document.getElementById('containerTask');
 const arrowButton = document.getElementById('addTaskBtn');
@@ -26,7 +26,7 @@ const renderTasks = (taskArray) => {
 };
 
 const addTask = () => {
-    const taskValue = inputToDo.value;
+    const taskValue = addTaskInput.value;
     const tasks = taskValue.split(",").map(task => task.trim());
     tasks.forEach(task => {
         const position = taskStorage.length;
@@ -72,7 +72,7 @@ arrowButton.addEventListener('click', () => {
     window.location.reload();
 });
 
-inputToDo.addEventListener('change', addTask);
+addTaskInput.addEventListener('change', addTask);
 
 Sortable.create(containerTask, {
     animation: 150,
@@ -83,37 +83,21 @@ Sortable.create(containerTask, {
 
 renderTasks(taskStorage);
 
-const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-tooltipTriggerList.map(function (tooltipTriggerEl) {
-  return new bootstrap.Tooltip(tooltipTriggerEl, {
-    delay: { "show": 1000, "hide": 0 }
-  })
-})
+const showAddTaskTooltip = () => {
+  const addTaskTooltip = new bootstrap.Tooltip(addTaskInput, {
+    title: 'Add more than one task by separating them with commas.',
+    placement: 'top',
+    delay: {
+      show: 500,
+      hide: 2000,
+    },
+  });
 
-const showTooltip = (text) => {
-    const tooltip = document.createElement('div');
-    tooltip.classList.add('tooltip', 'show');
-    tooltip.innerHTML = text;
-
-    const inputGroup = inputToDo.parentElement;
-    inputGroup.appendChild(tooltip);
-
-    setTimeout(() => {
-        tooltip.remove();
-    }, 100);
+  addTaskTooltip.show();
+  
+  setTimeout(() => {
+    addTaskTooltip.dispose();
+  }, 2000);
 };
 
-addTaskBtn.addEventListener('click', () => {
-    const taskValue = inputToDo.value.trim();
-
-    if (taskValue) {
-        const tasks = taskValue.split(',');
-        tasks.forEach(task => {
-            showTooltip(`Tarefa "${task}" adicionada`);
-            // Adicionar a tarefa à lista
-        });
-        inputToDo.value = '';
-    } else {
-        showTooltip('Por favor, insira uma tarefa');
-    }
-});
+addTaskInput.addEventListener('mouseover', showAddTaskTooltip);
