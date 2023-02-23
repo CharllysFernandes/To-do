@@ -1,9 +1,3 @@
-/* ====================================================
-Recreating the email field from https://webflow.com/cms. Just an experiment - not as cross-browser friendly as the original.
-Changed:
-- animated gradient bar to :after element
-- flexbox for layout
-==================================================== */
 html {
   box-sizing: border-box;
   font-size: 10px;
@@ -36,7 +30,7 @@ h4,
 h5,
 h6 {
   margin-top: 0;
-  
+
 }
 
 a {
@@ -219,4 +213,25 @@ a.demo {
 
 .card-style-input button:hover {
   color: #BFD2FF;
+}
+
+.tooltip {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: block;
+  opacity: 1;
+  pointer-events: none;
+  background-color: #000000;
+  color: #fff;
+  font-size: 1.5rem;
+  padding: 4px;
+  border-radius: 5px;
+  z-index: 9999;
+  transition: opacity 0.3s ease;
+}
+
+.tooltip.show {
+  opacity: 0.9;
 }
