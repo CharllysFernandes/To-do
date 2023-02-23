@@ -235,3 +235,21 @@ a.demo {
 .tooltip.show {
   opacity: 0.9;
 }
+
+#trash {
+  color: #B294FF;
+  font-size: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 1.2rem;
+}
+
+
+#trash.dragover {
+  color: red;
+}
+
+.bi-trash:hover {
+  color: red;
+}

@@ -49,9 +49,6 @@ const createTaskCard = (completed, task) => `
             <i class="bi ${completed ? 'bi-check-square' : 'bi-square'}"></i>
         </button>
         <h1 class="${completed ? 'text-decoration-line-through text-muted' : ''}">${task}</h1>
-        <button onclick="removeTask('${task}')">
-            <i class="bi bi-x-lg"></i>
-        </button>
     </div> 
 `;
 
@@ -84,20 +81,39 @@ Sortable.create(containerTask, {
 renderTasks(taskStorage);
 
 const showAddTaskTooltip = () => {
-  const addTaskTooltip = new bootstrap.Tooltip(addTaskInput, {
-    title: 'Add more than one task by separating them with commas.',
-    placement: 'top',
-    delay: {
-      show: 500,
-      hide: 2000,
-    },
-  });
+    const addTaskTooltip = new bootstrap.Tooltip(addTaskInput, {
+        title: 'Add more than one task by separating them with commas.',
+        placement: 'top',
+        delay: {
+            show: 500,
+            hide: 3000,
+        },
+    });
 
-  addTaskTooltip.show();
-  
-  setTimeout(() => {
-    addTaskTooltip.dispose();
-  }, 2000);
+    addTaskTooltip.show();
+
+    setTimeout(() => {
+        addTaskTooltip.dispose();
+    }, 2000);
 };
 
 addTaskInput.addEventListener('mouseover', showAddTaskTooltip);
+
+
+const trashIcon = document.getElementById('trash');
+
+trashIcon.addEventListener('dragover', (event) => {
+    event.preventDefault();
+    trashIcon.classList.add('dragover');
+});
+
+trashIcon.addEventListener('dragleave', () => {
+    trashIcon.classList.remove('dragover');
+});
+
+trashIcon.addEventListener('drop', (event) => {
+    event.preventDefault();
+    const taskTitle = event.dataTransfer.getData('text/plain');
+    removeTask(taskTitle);
+    trashIcon.classList.remove('dragover');
+});
