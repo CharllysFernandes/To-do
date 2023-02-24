@@ -249,3 +249,20 @@ a.demo {
 .bi-trash:hover {
   color: red;
 }
+
+.remove-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .remove-button {
+      display: none;
+  }
+}

@@ -43,14 +43,39 @@ const checkTask = (taskTitle) => {
     saveTasks(taskStorage);
 };
 
-const createTaskCard = (completed, task) => `
-    <div class="card-style-input animate__animated animate__fadeIn">
+// const createTaskCard = (completed, task) => `
+//     <div class="card-style-input animate__animated animate__fadeIn">
+//         <button onclick="checkTask('${task}')">
+//             <i class="bi ${completed ? 'bi-check-square' : 'bi-square'}"></i>
+//         </button>
+//         <h1 class="${completed ? 'text-decoration-line-through text-muted' : ''}">${task}</h1>
+//     </div> 
+// `;
+
+const createTaskCard = (completed, task) => {
+    const card = document.createElement('div');
+    card.classList.add('card-style-input', 'animate__animated', 'animate__fadeIn');
+    card.innerHTML = `
         <button onclick="checkTask('${task}')">
             <i class="bi ${completed ? 'bi-check-square' : 'bi-square'}"></i>
         </button>
         <h1 class="${completed ? 'text-decoration-line-through text-muted' : ''}">${task}</h1>
-    </div> 
-`;
+    `;
+    
+    if (window.innerWidth <= 768) {
+        const removeButton = document.createElement('button');
+        removeButton.classList.add('remove-button');
+        removeButton.innerHTML = '<i class="bi bi-x"></i>';
+        removeButton.onclick = () => {
+            removeTask(task);
+        };
+        
+        card.appendChild(removeButton);
+    }
+    
+    return card.outerHTML;
+};
+
 
 const saveTasks = (taskArray, shouldReloadPage = true) => {
     localStorage.setItem('taskDB', JSON.stringify(taskArray));
