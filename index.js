@@ -114,7 +114,6 @@ trashIcon.addEventListener('dragleave', () => {
 trashIcon.addEventListener('drop', (event) => {
     event.preventDefault();
     const taskTitle = event.dataTransfer.getData('text/plain').trim().replace(/\n/g, '');
-    console.log(taskTitle)
     removeTask(taskTitle);
     trashIcon.classList.remove('dragover');
 });
